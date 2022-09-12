@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'add_medicines' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <h5 class="form-title"><span>Add Medicine</span></h5>
+                    </div>
+
+                    {% include 'includes/messages.html' %}
+
+                    <div class="col-sm-11">
+                        <div class="form-group">
+                            <label>Medicine Name</label>
+                            <input type="text" class="form-control" name="medicine_name" required>
+                        </div>
+                    </div>
+                    <div class="col-11">
+                        <div class="form-group">
+                            <label>Medicine Quantity</label>
+                            <input type="number" class="form-control" name="quantity" min="1" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="form-group">
+                            <label>Manufacture</label>
+                            <input type="text" class="form-control" name="manufacture">
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="form-group">
+                            <label>Valid From</label>
+                            <input type="date" class="form-control" name="valid_from" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="form-group">
+                            <label>Valid To</label>
+                            <input type="date" class="form-control" name="valid_to" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-11">
+                        <div class="form-group">
+                            <label>In Store</label>
+                            <select class="form-control" name="location_id" required>
+                                <option>Select Location</option>
+                                {% for i in location %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Add Medicine</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
